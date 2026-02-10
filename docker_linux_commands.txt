@@ -1,0 +1,64 @@
+
+DOCKER & LINUX COMMANDS PRACTICE LIST
+===================================
+
+# System & Package Management
+cat /etc/os-release
+sudo apt update
+sudo apt install net-tools jq -y
+apk add net-tools jq
+sudo yum install net-tools jq -y
+
+# Network & System Utilities
+ifconfig
+ip a
+ping -c 3 google.com
+curl -fsSL https://get.docker.com | sudo bash
+
+# Docker Verification
+docker --version
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+docker info
+
+# Docker Containers
+docker ps
+docker ps -a
+docker images
+
+# Run Containers
+docker run -d nginx:latest
+docker run -d --name app1 nginx:latest
+docker run -d --name app2 nginx
+docker run -d -p 8080:80 nginx
+docker run --rm -d --name frontend1 -p 8000:80 nginx:latest
+docker run hello-world
+
+# Stop / Start / Remove Containers
+docker stop app1
+docker start app1
+docker rm app1
+
+# Stop & Remove All Containers
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+
+# Run Multiple Containers Using Loop
+for i in {1..1}; do docker run -d nginx:latest; done
+for i in {1..10}; do docker run -d nginx:latest; done
+
+# Logs
+docker logs backend
+docker logs -f backend
+docker logs --tail 50 backend
+docker logs -f --timestamps backend
+
+# Linux Namespaces
+lsns
+lsns -t pid
+lsns -p <PID>
+watch lsns -t pid
+
+# Cleanup
+docker container prune
