@@ -1,4 +1,4 @@
-Virtual Machine vs Containers
+***Virtual Machine vs Containers***
 Virtual Machines (VMs) are like having a complete, separate computer within your computer. Each VM runs its own
 full operating system, like having another Windows or Linux inside your main system. Because they need to load
 an entire OS, VMs are big and take a while to start. They are very isolated from each other, making them secure,
@@ -9,8 +9,12 @@ main computer operating system but have their own space for running applications
 smaller and start very quickly since they dont need a full OS. They offer enough isolation to keep
 applications separate but are less isolated than VMs because they share the same OS.
 
-Docker Architecture
+***What is Docker***
+Docker is a containerization platform that allows developers to package an application along with all its dependencies, libraries, and configuration files into a single unit called a container.
+This ensures the application runs consistently across different environments such as development, testing, and production.
 
+
+***Docker Architecture***
 Docker Client : The Docker client is like the command center for Docker. It’s where you type in commands to tell Docker what to do. How it works: You use the Docker client to build, run, and manage Docker containers. It talks to the Docker daemon, which does the actual work. Example commands: docker build, docker run, docker pull.
 Docker Hub: Docker Hub is an online service where you can find and store Docker images. 
 How it works: It’s like an app store but for Docker images. You can download (“pull”) images others have created, or upload (“push”) your own images. Usage: When you need an image to create a container, you can pull it from Docker Hub. 
