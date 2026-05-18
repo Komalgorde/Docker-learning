@@ -3,11 +3,16 @@ Virtual Machines (VMs) are like having a complete, separate computer within your
 full operating system, like having another Windows or Linux inside your main system. Because they need to load
 an entire OS, VMs are big and take a while to start. They are very isolated from each other, making them secure,
 as each VM operates independently without knowing about the others.
+*Disadvantage: * Virtual Machines consume more system resources because each VM runs its own operating system, 
+making them heavier, slower, and harder to scale compared to containers.
+*OS compatibility issue.
+
 
 Containers, on the other hand, are like small, self-contained environments inside your computer. They share the
 main computer operating system but have their own space for running applications. Containers are much
 smaller and start very quickly since they dont need a full OS. They offer enough isolation to keep
 applications separate but are less isolated than VMs because they share the same OS.
+*Advantage : * light weight in nature , as os is shared.
 
 ***What is Docker***
 Docker is a containerization platform that allows developers to package an application along with all its dependencies, libraries, and configuration files into a single unit called a container.
