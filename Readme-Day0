@@ -20,3 +20,5 @@ Docker Hub: Docker Hub is an online service where you can find and store Docker 
 How it works: It’s like an app store but for Docker images. You can download (“pull”) images others have created, or upload (“push”) your own images. Usage: When you need an image to create a container, you can pull it from Docker Hub. 
 Docker Registry : A Docker registry is a place to store Docker images. Docker Hub is the most popular public registry, but you can also have private registries. How it works: Registries store the images you create and make them available for you to pull and run on your Docker client. Private registries are used for images you don’t want to share publicly. 
 Example: Companies often use private registries to store their internal application images securely.
+
+
