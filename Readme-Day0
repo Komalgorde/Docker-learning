@@ -5,8 +5,8 @@ an entire OS, VMs are big and take a while to start. They are very isolated from
 as each VM operates independently without knowing about the others.
 
 Containers, on the other hand, are like small, self-contained environments inside your computer. They share the
-main computer□^`^ys operating system but have their own space for running applications. Containers are much
-smaller and start very quickly since they don□^`^yt need a full OS. They offer enough isolation to keep
+main computer operating system but have their own space for running applications. Containers are much
+smaller and start very quickly since they dont need a full OS. They offer enough isolation to keep
 applications separate but are less isolated than VMs because they share the same OS.
 
 Docker Architecture
