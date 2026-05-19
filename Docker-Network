@@ -1,0 +1,100 @@
+***What is Docker network:***
+In Docker, a network is a communication channel that allows Docker containers to communicate with:
+other containers
+the host machine
+the internet
+Docker networking helps containers exchange data securely and efficiently.
+
+*Docker network ls
+
+***Docker network default type***
+
+***Types of Docker Networks and Their Uses***
+
+In Docker, different network types are used for different communication purposes.
+
+1. Bridge Network
+A private internal network for containers on the same Docker host.
+
+Use:
+Container-to-container communication
+Most commonly used network
+Default Docker network
+Example
+docker network create custom --driver bridge 
+Use Case:
+
+Frontend container communicating with backend container on same machine.
+
+2. Host Network
+Container directly uses the host machine’s network.
+
+Use:
+Better performance
+No network isolation
+Container shares host ports
+Example
+docker run --network host nginx
+Use Case
+Applications requiring high-speed networking.
+
+3. None Network
+Container has no network access.
+
+Use
+Maximum isolation
+Security purposes
+Testing environments
+
+Example
+docker run --network none ubuntu
+Use Case
+
+Running isolated secure containers.
+
+4. Overlay Network
+Connects containers running on multiple Docker hosts.
+
+Use
+Used in Docker Swarm
+Multi-host container communication
+Example
+docker network create -d overlay myoverlay
+
+Practicle
+create 2 container app1 and app2
+docker run --rm -d --name app1 -p 8000:80 nginx:latest
+docker run --rm -d --name app2 -p 8001:80 nginx:latest
+
+docker ps
+to get the ip, subnet details
+docker inspect app1 grep -i Ipaddress
+docker inspect app2 grep -i Ipaddress
+
+Now log in app1 and ping aap2
+docker exec -it app1 bash
+ping app2 ip
+
+Note: In real world pinging with ip is not correct use container name
+
+For these we need custome network
+ docker network create custome --driver bridge
+
+docker network ls
+
+create container app3
+docker run --rm -d --name app3 -p 8002:80 --network custome  nginx:latest
+docker run --rm -d --name app4 -p 8002:80 --network custome  nginx:latest
+
+docker inspect app3 grep -i Ipaddress
+docker inspect app3 grep -i Ipaddress
+
+Now will ping from custome network to bridge network to check if they can connect or not
+
+docker exec -it app3 bash
+ping app1
+
+
+
+
+
