@@ -1,0 +1,82 @@
+***Volume:***
+A Docker volume is a Docker-managed persistent storage mechanism used to store and preserve data independently of containers, so the data remains available even if the container is stopped, removed, or recreated.
+
+*We create the volume inside Docker using:
+
+docker volume create <volume-name>
+
+Example:
+
+docker volume create db-data
+
+*To list all Docker volumes:
+
+docker volume ls
+
+*We can attach the volume to a container on a specific path:
+
+docker run --rm -d --name app1 -p 8000:80 -v volume-name:/data image-name
+
+Meaning:
+
+Docker Volume volume-name  →  /data inside container
+
+*If you delete a container without a volume attached, the data inside the container is lost.
+If a volume is attached, the data remains persistent even after container deletion.
+
+*To check where Docker volumes are stored in Linux:
+
+cd /var/lib/docker/volumes
+
+*You can inspect volume details using:
+
+docker volume inspect volume-name
+
+*Volumes can also be reused and attached to other containers.
+
+
+***bind mount:***
+
+A bind mount is used when you want to attach a file or folder from your host computer directly to a container.
+
+Example:
+
+docker run -v /host/path:/container/path image-name
+
+Example:
+
+docker run -v $(pwd):/app nginx
+
+Meaning:
+
+Host folder  →  Container folder
+
+Any changes made:
+
+on host machine reflect inside container
+inside container reflect on host machine
+
+*Bind mounts are mainly used for:
+
+development
+live code changes
+configuration files
+sharing local files with containers
+
+Unlike volumes:
+
+bind mounts depend on host file paths
+Docker does not manage the storage automatically
+
+***To run command (docker ps) we need docker socket. without this will get error
+To run Docker inside container
+
+You must mount Docker socket:
+
+docker run -v /var/run/docker.sock:/var/run/docker.sock docker
+
+This is called:
+
+Docker socket bind mount
+
+Now container can communicate with host Docker daemon.
