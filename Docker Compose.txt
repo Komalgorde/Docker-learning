@@ -1,0 +1,81 @@
+*** What is Docker Compose?***
+
+Docker Compose is a tool used to manage and run multiple containers using a single YAML configuration file called `docker-compose.yml`.
+
+docker compose version
+
+It helps us:
+* Start multiple containers together
+* Stop multiple containers together
+* Manage application dependencies easily
+* Configure networking, volumes, and environment variables
+
+It is mainly used for multi-container applications like:
+* Application container
+* Database container
+* Redis container
+* Nginx container
+
+
+*** Real-Time Example
+
+Suppose we have:
+* Development environment
+* Staging environment
+* Production environment
+
+Using Docker Compose, we can define all required services inside one compose file and start them together using a single command.
+
+Example:
+docker-compose up
+
+To stop all containers:
+docker-compose down
+
+# Example Docker Compose File
+
+```yaml id="t7w3vk"
+version: '3'
+
+services:
+  app:
+    image: myapp
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: admin
+
+Here:
+
+* `app` container runs application
+* `db` container runs PostgreSQL
+* Both containers communicate automatically
+
+# Advantages of Docker Compose
+
+* Easy multi-container management
+* Single configuration file
+* Faster local development setup
+* Easy networking between containers
+* Simplifies testing environments
+
+# Common Docker Compose Commands
+
+### Start containers
+docker-compose up
+
+### Start in detached mode
+
+docker-compose up -d
+
+### Stop containers
+
+docker-compose down
+
+### View running containers
+
+docker-compose ps
+
