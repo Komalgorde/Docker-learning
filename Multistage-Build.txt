@@ -1,0 +1,89 @@
+***What is distroless images: ***
+
+
+Distroless images are lightweight Docker images that contain only the application and its required runtime dependencies.
+They do not contain:
+Shell
+Package manager
+Debugging tools
+Unnecessary OS utilities
+
+Because of this:
+Image size becomes smaller
+Security improves
+Attack surface reduces
+
+One limitation is:
+We cannot directly log in to the container using /bin/bash or /bin/sh because shell utilities are not available.
+
+
+***What is Multi-Stage Build?
+
+Multi-stage build allows us to use multiple stages within a single Dockerfile to reduce the final image size.
+
+In the first stage:
+
+Application is built
+
+In the second stage:
+
+Only required artifacts are copied to the final image
+
+Benefits:
+
+Smaller image size
+Better security
+Faster deployments
+Reduced unnecessary dependencies.
+
+ eg:
+1. it will reduce size to half to half
+# Stage 1: Build stage 284
+FROM maven:3.8.5-openjdk-17-slim AS build
+WORKDIR /app
+COPY . .
+RUN ./mvnw package -DskipTests
+
+# Stage 2: Runtime stage
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+
+2.it will reduce suze to half
+
+# Stage 1: Build stage 
+FROM maven:3.8.5-openjdk-17-slim AS build
+WORKDIR /app
+COPY . .
+RUN ./mvnw package -DskipTests
+
+# Stage 2: Runtime stage
+FROM openjdk:17-jdk-slim AS runtime
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+
+***Ways to Reduce Docker Image Size:***
+1. Use Alpine Images
+
+Alpine images are lightweight minimal Linux images.
+
+2. Reduce RUN Instructions
+
+Combine commands to reduce image layers.
+3. Use Multi-Stage Builds
+
+Only copy required files to final image.
+
+4. Use .dockerignore
+
+Exclude unnecessary files:
+
+5. Remove Temporary Files and Cache
+
+Cleanup after installation.
+
